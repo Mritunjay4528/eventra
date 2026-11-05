@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Details — Eventra</title>
+  <meta name="description" content="Event details and registration on Eventra.">
+  <meta name="theme-color" content="#ff4f2b">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("eventra-theme");
+        if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.dataset.theme = t;
+      } catch (e) { document.documentElement.dataset.theme = "light"; }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html" aria-label="Eventra home">
+        <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M10 9h12M10 16h9M10 23h12M10 9v14" stroke="var(--bg)" stroke-width="3" stroke-linecap="round"/></svg>
+        <span>Eventra</span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html#featured">Featured</a></li>
+          <li><a href="index.html#events">Events</a></li>
+          <li><a href="index.html#how">How it works</a></li>
+          <li><a href="tickets.html">My Tickets <span class="nav-badge" data-ticket-count hidden>0</span></a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode">
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+        </button>
+        <a class="btn btn-primary btn-sm header-cta" href="#register">Register</a>
+        <button class="icon-btn nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Toggle menu">
+          <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Filled by js/event.js -->
+    <div id="event-root">
+      <div class="container loading-block" aria-busy="true">Loading event…</div>
+    </div>
+
+    <!-- Not-found state -->
+    <section class="container not-found" id="not-found" hidden>
+      <div class="empty-icon" aria-hidden="true">?</div>
+      <h1>We couldn't find that event</h1>
+      <p>It may have been removed or the link is incorrect.</p>
+      <a class="btn btn-primary" href="index.html#events">Browse all events</a>
+    </section>
+
+    <!-- Related -->
+    <section class="section" id="related-section" hidden aria-labelledby="related-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Keep exploring</p>
+            <h2 class="section-title" id="related-title">You might also like</h2>
+          </div>
+          <a class="btn btn-ghost" href="index.html#events">All events →</a>
+        </div>
+        <div class="events-grid events-grid-3" id="related-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ SUCCESS MODAL ============ -->
+  <div class="modal" id="success-modal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+      <div class="modal-check" aria-hidden="true">
+        <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="none"/><path fill="none" d="m15 27 7 7 15-16"/></svg>
+      </div>
+      <h2 id="modal-title">You're in!</h2>
+      <p class="modal-sub" id="modal-sub"></p>
+      <div class="ticket-mini" id="modal-ticket"></div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="tickets.html">View my tickets</a>
+        <button class="btn btn-ghost" type="button" data-close>Done</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>© <span data-year>2026</span> Eventra. Built with HTML, CSS &amp; JavaScript for K Explore.</p>
+      <p><a href="index.html">Home</a> · <a href="tickets.html">My Tickets</a></p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/event.js"></script>
+</body>
+</html>
